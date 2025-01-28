@@ -1,5 +1,6 @@
 import { IUser } from "../../Models/users";
 import { IController, IHttpRequest, IHttpResponse } from "../protocols";
+import { badRequest, ok, serverError } from "../utils/requestHelper";
 import { IUpdateUserRepository, IUpdateUserParams } from "./protocols";
 
 export class UpdateUserController implements IController {
@@ -13,17 +14,11 @@ export class UpdateUserController implements IController {
       const body = httpRequest?.body;
 
       if (!body) {
-        return {
-          statusCode: 400,
-          body: "Body ausente",
-        };
+        return badRequest("Body ausente");
       }
 
       if (!id) {
-        return {
-          statusCode: 400,
-          body: "Id do usuário não encontrado",
-        };
+        return badRequest("Id do usuário não encontrado");
       }
 
       const allowedFieldsToUpdate: (keyof IUpdateUserParams)[] = [
@@ -37,23 +32,14 @@ export class UpdateUserController implements IController {
       );
 
       if (someFieldIsNotAllowedToUpdate) {
-        return {
-          statusCode: 400,
-          body: "Algum dos campos recebidos não pode ser atualizado",
-        };
+        return badRequest("Algum dos campos recebidos não pode ser atualizado");
       }
 
       const user = await this.updateUserRepository.updateUser(id, body);
 
-      return {
-        statusCode: 200,
-        body: user,
-      };
+      return ok(user);
     } catch (error) {
-      return {
-        statusCode: 500,
-        body: "Algo deu errado",
-      };
+      return serverError();
     }
   }
 }
