@@ -1,22 +1,18 @@
 import validator from "validator";
 import { IUser } from "../../Models/users";
-import { IHttpRequest, IHttpResponse } from "../protocols";
-import {
-  CreateUserParams,
-  ICreateUserController,
-  ICreateUserRepository,
-} from "./protocols";
+import { IController, IHttpRequest, IHttpResponse } from "../protocols";
+import { ICreateUserParams, ICreateUserRepository } from "./protocols";
 
-export class CreateUserController implements ICreateUserController {
+export class CreateUserController implements IController {
   constructor(private readonly createUserRepository: ICreateUserRepository) {}
 
   async handle(
-    httpRequest: IHttpRequest<CreateUserParams>
+    httpRequest: IHttpRequest<ICreateUserParams>
   ): Promise<IHttpResponse<IUser>> {
     try {
       const requiredFields = ["firstName", "lastName", "email", "password"];
       for (const field of requiredFields) {
-        if (!httpRequest?.body?.[field as keyof CreateUserParams]?.length) {
+        if (!httpRequest?.body?.[field as keyof ICreateUserParams]?.length) {
           return {
             statusCode: 400,
             body: `Campo ${field} é obrigatório`,

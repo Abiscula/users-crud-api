@@ -1,18 +1,24 @@
 import { IUser } from "../../Models/users";
-import { IHttpRequest, IHttpResponse } from "../protocols";
-import {
-  IUpdateUserController,
-  IUpdateUserRepository,
-  UpdateUserParams,
-} from "./protocols";
+import { IController, IHttpRequest, IHttpResponse } from "../protocols";
+import { IUpdateUserRepository, IUpdateUserParams } from "./protocols";
 
-export class UpdateUserController implements IUpdateUserController {
+export class UpdateUserController implements IController {
   constructor(private readonly updateUserRepository: IUpdateUserRepository) {}
 
-  async handle(httpRequest: IHttpRequest<any>): Promise<IHttpResponse<IUser>> {
+  async handle(
+    httpRequest: IHttpRequest<IUpdateUserParams>
+  ): Promise<IHttpResponse<IUser>> {
     try {
       const id = httpRequest?.params?.id;
       const body = httpRequest?.body;
+
+      if (!body) {
+        return {
+          statusCode: 400,
+          body: "Body ausente",
+        };
+      }
+
       if (!id) {
         return {
           statusCode: 400,
@@ -20,14 +26,14 @@ export class UpdateUserController implements IUpdateUserController {
         };
       }
 
-      const allowedFieldsToUpdate: (keyof UpdateUserParams)[] = [
+      const allowedFieldsToUpdate: (keyof IUpdateUserParams)[] = [
         "firstName",
         "lastName",
         "password",
       ];
 
       const someFieldIsNotAllowedToUpdate = Object.keys(body).some(
-        (key) => !allowedFieldsToUpdate.includes(key as keyof UpdateUserParams)
+        (key) => !allowedFieldsToUpdate.includes(key as keyof IUpdateUserParams)
       );
 
       if (someFieldIsNotAllowedToUpdate) {

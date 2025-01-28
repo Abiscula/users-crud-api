@@ -1,13 +1,13 @@
 import { ObjectId } from "mongodb";
 import {
   IUpdateUserRepository,
-  UpdateUserParams,
+  IUpdateUserParams,
 } from "../../Controllers/update-user/protocols";
 import { MongoClient } from "../../database/mongo";
 import { IUser } from "../../Models/users";
 
 export class MongoUpdateUserRepository implements IUpdateUserRepository {
-  async updateUser(id: string, params: UpdateUserParams): Promise<IUser> {
+  async updateUser(id: string, params: IUpdateUserParams): Promise<IUser> {
     await MongoClient.db.collection("users").updateOne(
       { _id: new ObjectId(id) },
       {
