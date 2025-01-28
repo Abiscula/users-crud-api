@@ -6,7 +6,7 @@ O objetivo principal deste projeto é praticar e implementar os conceitos de cri
 
 ---
 
-## 🚀 Tecnologias e Ferramentas
+## 🛠 Tecnologias e Ferramentas
 
 - [Node.js](https://nodejs.org/)
 - [Express.js](https://expressjs.com/)
@@ -15,7 +15,7 @@ O objetivo principal deste projeto é praticar e implementar os conceitos de cri
 
 ---
 
-## 🛠 Funcionalidades
+## ✨ Funcionalidades
 
 A API implementa um CRUD completo para a gestão de usuários:
 
