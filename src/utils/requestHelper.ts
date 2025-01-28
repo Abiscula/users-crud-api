@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "../protocols";
+import { HttpStatusCode } from "../Controllers/protocols";
 
 export const ok = (body: any) => ({ statusCode: HttpStatusCode.OK, body });
 

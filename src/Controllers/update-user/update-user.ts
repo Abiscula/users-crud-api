@@ -1,6 +1,6 @@
 import { IUser } from "../../Models/users";
 import { IController, IHttpRequest, IHttpResponse } from "../protocols";
-import { badRequest, ok, serverError } from "../utils/requestHelper";
+import { badRequest, ok, serverError } from "../../utils/requestHelper";
 import { IUpdateUserRepository, IUpdateUserParams } from "./protocols";
 
 export class UpdateUserController implements IController {

@@ -1,6 +1,6 @@
 import { IUser } from "../../Models/users";
 import { IController, IHttpRequest, IHttpResponse } from "../protocols";
-import { badRequest, ok, serverError } from "../utils/requestHelper";
+import { badRequest, ok, serverError } from "../../utils/requestHelper";
 import { IDeleteUserRepository } from "./protocols";
 
 export class DeleteUserController implements IController {

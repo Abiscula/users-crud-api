@@ -1,5 +1,5 @@
 import { IController } from "../protocols";
-import { ok, serverError } from "../utils/requestHelper";
+import { ok, serverError } from "../../utils/requestHelper";
 import { IGetUsersRepository } from "./protocols";
 
 export class GetUsersController implements IController {

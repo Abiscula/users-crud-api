@@ -2,7 +2,7 @@ import validator from "validator";
 import { IUser } from "../../Models/users";
 import { IController, IHttpRequest, IHttpResponse } from "../protocols";
 import { ICreateUserParams, ICreateUserRepository } from "./protocols";
-import { badRequest, created, serverError } from "../utils/requestHelper";
+import { badRequest, created, serverError } from "../../utils/requestHelper";
 
 export class CreateUserController implements IController {
   constructor(private readonly createUserRepository: ICreateUserRepository) {}
